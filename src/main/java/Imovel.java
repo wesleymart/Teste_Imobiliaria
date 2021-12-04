@@ -4,13 +4,7 @@ import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import static org.assertj.core.api.Assertions.*;
-import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
-
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
@@ -41,7 +35,7 @@ public class Imovel {
     }
 
     @Então("o valor que aparecer nas telas seguntes tem que ser igual ao valor da tela inicial")
-    public void o_valor_que_aparecer_nas_telas_seguntes_tem_que_ser_igual_ao_da_tela_inicial() throws InterruptedException {
+    public void o_valor_que_aparecer_nas_telas_seguntes_tem_que_ser_igual_ao_da_tela_inicial() {
 
         String valorInicial = driver.findElement(By.cssSelector("#appartment_box > div.appartment_item.block > div.mini_block_full_description > div:nth-child(3) > div > span:nth-child(2)")).getText();
         driver.findElement(By.xpath("//*[@id=\"appartment_box\"]/div[7]/div[1]/a")).click();
@@ -49,7 +43,13 @@ public class Imovel {
         String valorTerceiro = driver.findElement(By.cssSelector("#firsttabs > div.resp-tabs-container > div.tabs1_1.tab_bl_1.resp-tab-content.resp-tab-content-active > dl > dd:nth-child(10) > span > span:nth-child(2)")).getText();
         assertThat(valorSegundo).isEqualTo(valorInicial);
         assertThat(valorTerceiro).isEqualTo(valorInicial);
+
+    }
+
+    @After
+    public void fechar(){
         driver.quit();
     }
+
 
 }
